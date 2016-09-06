@@ -1,10 +1,14 @@
 Ball ball;
+int leftScore;
+int rightScore;
 
 void setup() {
   size(800, 500);
   stroke(255);
   
   ball = new Ball();
+  leftScore = 0;
+  rightScore = 0;
 }
 
 void draw() {
@@ -15,6 +19,8 @@ void draw() {
   final int batSpacing = 30;
   final int batLength = 50;
   final int batLimit = 20;
+  final int scoreSpacingX = 40;
+  final int scoreSpacingY = 30;
   
   background(50);
   strokeWeight(defaultStrokeWeight);
@@ -46,9 +52,13 @@ void draw() {
     ball.velocityY *= -1;
   }
   
-  // Check whether ball is on left or right side of court; if it does, reset ball
-  if ((ball.positionX == courtEdgeSpacingX || ball.positionX == width - courtEdgeSpacingX)
-      && ball.positionY >= courtEdgeSpacingY && ball.positionY <= height - courtEdgeSpacingY) {
+  // Check whether ball is on left or right side of court; if it does, increment relevant score and reset ball
+  if (ball.positionX == courtEdgeSpacingX && ball.positionY >= courtEdgeSpacingY && ball.positionY <= height - courtEdgeSpacingY) {
+    rightScore++;
+    ball.reset();
+  }
+  if (ball.positionX == width - courtEdgeSpacingX && ball.positionY >= courtEdgeSpacingY && ball.positionY <= height - courtEdgeSpacingY) {
+    leftScore++;
     ball.reset();
   }
   
@@ -59,6 +69,12 @@ void draw() {
   ball.positionY += ball.velocityY;
   point(ball.positionX, ball.positionY);
   strokeWeight(defaultStrokeWeight);
+  
+  // Draw scores
+  textSize(20);
+  fill(255);
+  text(leftScore, scoreSpacingX, scoreSpacingY);
+  text(rightScore, width - scoreSpacingX, scoreSpacingY);
 }
 
 class Ball {
