@@ -42,7 +42,7 @@ void draw() {
   line(batSpacing, leftBatStart, batSpacing, leftBatStart + batLength);
   line(width - batSpacing, rightBatStart, width - batSpacing, rightBatStart + batLength);
   
-  // Check whether ball is on bats and/or court edges and change velocity accordingly
+  // Check whether ball is on a bat and/or top or bottom edge and change velocity accordingly
   if ((ball.positionX == batSpacing && ball.positionY >= leftBatStart && ball.positionY <= leftBatStart + batLength)
       || (ball.positionX == width - batSpacing && ball.positionY >= rightBatStart && ball.positionY <= rightBatStart + batLength)) {
     ball.velocityX *= -1;
@@ -52,7 +52,7 @@ void draw() {
     ball.velocityY *= -1;
   }
   
-  // Check whether ball is on left or right side of court; if it does, increment relevant score and reset ball
+  // Check whether ball is on left or right edge; if it is, increment relevant score and reset ball
   if (ball.positionX == courtEdgeSpacingX && ball.positionY >= courtEdgeSpacingY && ball.positionY <= height - courtEdgeSpacingY) {
     rightScore++;
     ball.reset();
