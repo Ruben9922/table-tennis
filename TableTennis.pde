@@ -78,7 +78,8 @@ void draw() {
 }
 
 class Ball {
-  static final int ballSpeed = 2;
+  static final int speedX = 2;
+  static final int maxSpeedY = 4;
   
   int positionX;
   int positionY;
@@ -97,13 +98,13 @@ class Ball {
   }
   
   Ball() {
+    velocityX = floor(random(2)) == 0 ? speedX : -speedX;
     reset();
   }
   
   void reset() {
     positionX = width / 2;
     positionY = height / 2;
-    velocityX = floor(random(2)) == 0 ? ballSpeed : -ballSpeed;
-    velocityY = floor(random(5) - 2);
+    velocityY = floor(random(maxSpeedY + 1) - floor(maxSpeedY / 2));
   }
 }
