@@ -21,6 +21,7 @@ void draw() {
   final int batLimit = 20;
   final int scoreSpacingX = 40;
   final int scoreSpacingY = 30;
+  final int scoreOffsetX = 6; // Since the width of the text is not taken into account when displaying the score
   
   background(50);
   strokeWeight(defaultStrokeWeight);
@@ -73,8 +74,8 @@ void draw() {
   // Draw scores
   textSize(20);
   fill(255);
-  text(leftScore, scoreSpacingX, scoreSpacingY);
-  text(rightScore, width - scoreSpacingX, scoreSpacingY);
+  text(leftScore, scoreSpacingX - scoreOffsetX, scoreSpacingY);
+  text(rightScore, width - scoreSpacingX - scoreOffsetX, scoreSpacingY);
 }
 
 class Ball {
