@@ -14,6 +14,7 @@ public class Main extends Application {
     private Bat leftBat;
     private Bat rightBat;
     private Input input = new Input();
+    private double lastTime = System.nanoTime();
 
     public static void main(String[] args) {
         launch(args);
@@ -30,12 +31,12 @@ public class Main extends Application {
 
         setup(gc);
 
-        final long startTime = System.nanoTime();
         new AnimationTimer() {
             @Override
-            public void handle(long now) {
-                double delta = (now - startTime) / 1000000000.0;
+            public void handle(long currentTime) {
+                double delta = calculateDelta(currentTime);
                 draw(gc, delta);
+
             }
         }.start();
 
@@ -46,6 +47,12 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private double calculateDelta(long currentTime) {
+        double delta = (currentTime - lastTime) / 1000000.0;
+        lastTime = currentTime;
+        return delta;
     }
 
     private void setup(GraphicsContext gc) {

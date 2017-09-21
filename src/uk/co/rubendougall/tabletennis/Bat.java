@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 
 class Bat {
     private static final double BAT_LENGTH = 80;
-    private static final double VELOCITY = 3;
+    private static final double VELOCITY = 1.2;
 
     private Point2D position;
 
