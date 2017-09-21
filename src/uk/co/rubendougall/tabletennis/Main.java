@@ -30,6 +30,7 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 double delta = (now - startTime) / 1000000000.0;
+                draw(gc, delta);
             }
         }.start();
 
