@@ -63,8 +63,8 @@ public class Main extends Application {
 
         // Instantiate bats
         double batSpacingX = 30;
-        leftBat = new Bat(new Point2D(batSpacingX, (canvas.getHeight() - Bat.BAT_LENGTH) / 2));
-        rightBat = new Bat(new Point2D(canvas.getWidth() - batSpacingX, (canvas.getHeight() - Bat.BAT_LENGTH) / 2));
+        leftBat = new Bat(gc, batSpacingX);
+        rightBat = new Bat(gc, canvas.getWidth() - batSpacingX);
     }
 
     private void draw(GraphicsContext gc, double delta) {
