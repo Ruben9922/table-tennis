@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -83,8 +84,8 @@ public class Main extends Application {
         gc.strokeLine(canvas.getWidth() / 2, centreLineSpacing, canvas.getWidth() / 2,
                 canvas.getHeight() - centreLineSpacing);
 
-        leftBat.update(gc, delta, input);
-        rightBat.update(gc, delta, input);
+        leftBat.update(gc, delta, input, KeyCode.W, KeyCode.S);
+        rightBat.update(gc, delta, input, KeyCode.UP, KeyCode.DOWN);
 
         leftBat.draw(gc);
         rightBat.draw(gc);

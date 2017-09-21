@@ -18,12 +18,12 @@ class Bat {
         position = new Point2D(positionX, (canvas.getHeight() - Bat.BAT_LENGTH) / 2);
     }
 
-    void update(GraphicsContext gc, double delta, Input input) {
+    void update(GraphicsContext gc, double delta, Input input, KeyCode moveUpCode, KeyCode moveDownCode) {
         Canvas canvas = gc.getCanvas();
 
-        if (input.isKeyPressed(KeyCode.UP)) {
+        if (input.isKeyPressed(moveUpCode)) {
             position = position.subtract(0, VELOCITY * delta);
-        } else if (input.isKeyPressed(KeyCode.DOWN)) {
+        } else if (input.isKeyPressed(moveDownCode)) {
             position = position.add(0, VELOCITY * delta);
         }
 
