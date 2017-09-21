@@ -11,6 +11,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    private Bat leftBat;
+    private Bat rightBat;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -57,22 +60,18 @@ public class Main extends Application {
         double centreLineSpacing = 30;
         gc.strokeLine(canvas.getWidth() / 2, centreLineSpacing, canvas.getWidth() / 2,
                 canvas.getHeight() - centreLineSpacing);
+
+        // Instantiate bats
+        double batSpacingX = 30;
+        leftBat = new Bat(new Point2D(batSpacingX, (canvas.getHeight() - Bat.BAT_LENGTH) / 2));
+        rightBat = new Bat(new Point2D(canvas.getWidth() - batSpacingX, (canvas.getHeight() - Bat.BAT_LENGTH) / 2));
     }
 
     private void draw(GraphicsContext gc, double delta) {
-        Canvas canvas = gc.getCanvas();
+        leftBat.update(gc, delta);
+        rightBat.update(gc, delta);
 
-        // Draw bats
-        gc.setStroke(Color.grayRgb(255));
-        double batLength = 80;
-        Point2D batSpacing = new Point2D(30, 20);
-        Point2D leftBatStart = new Point2D(batSpacing.getX(),
-                Utilities.constrain(100, batSpacing.getY(), canvas.getHeight() - batSpacing.getY() - batLength));
-        Point2D rightBatStart = new Point2D(canvas.getWidth() - batSpacing.getX(),
-                Utilities.constrain(150, batSpacing.getY(), canvas.getHeight() - batSpacing.getY() - batLength));
-        Point2D leftBatEnd = new Point2D(leftBatStart.getX(), leftBatStart.getY() + batLength);
-        Point2D rightBatEnd = new Point2D(rightBatStart.getX(), rightBatStart.getY() + batLength);
-        gc.strokeLine(leftBatStart.getX(), leftBatStart.getY(), leftBatEnd.getX(), leftBatEnd.getY());
-        gc.strokeLine(rightBatStart.getX(), rightBatStart.getY(), rightBatEnd.getX(), rightBatEnd.getY());
+        leftBat.draw(gc);
+        rightBat.draw(gc);
     }
 }
