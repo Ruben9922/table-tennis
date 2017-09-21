@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -21,6 +22,8 @@ public class Main extends Application {
         Canvas canvas = new Canvas(800, 500);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
+        setup(gc);
+
         final long startTime = System.nanoTime();
         new AnimationTimer() {
             @Override
@@ -32,6 +35,12 @@ public class Main extends Application {
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    private void setup(GraphicsContext gc) {
+        Canvas canvas = gc.getCanvas();
+        gc.setFill(Color.grayRgb(50));
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
     private void draw(GraphicsContext gc, double delta) {
