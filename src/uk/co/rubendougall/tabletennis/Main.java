@@ -1,4 +1,4 @@
-package sample;
+package uk.co.rubendougall.tabletennis;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
