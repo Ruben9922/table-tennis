@@ -2,6 +2,7 @@ package uk.co.rubendougall.tabletennis;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -39,8 +40,16 @@ public class Main extends Application {
 
     private void setup(GraphicsContext gc) {
         Canvas canvas = gc.getCanvas();
+
+        // Draw background
         gc.setFill(Color.grayRgb(50));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        // Draw court edge
+        gc.setStroke(Color.grayRgb(140));
+        Point2D edgeSpacing = new Point2D(20, 20);
+        gc.strokeRect(edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - (2 * edgeSpacing.getX()),
+                canvas.getHeight() - (2 * edgeSpacing.getY()));
     }
 
     private void draw(GraphicsContext gc, double delta) {
