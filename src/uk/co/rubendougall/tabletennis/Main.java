@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private Bat leftBat;
     private Bat rightBat;
+    private Input input = new Input();
 
     public static void main(String[] args) {
         launch(args);
@@ -23,6 +24,7 @@ public class Main extends Application {
         primaryStage.setTitle("Table Tennis");
 
         Group root = new Group();
+        Scene scene = new Scene(root);
         Canvas canvas = new Canvas(800, 500);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -37,12 +39,25 @@ public class Main extends Application {
             }
         }.start();
 
+        scene.setOnKeyPressed(input::handleKeyPressed);
+        scene.setOnKeyReleased(input::handleKeyReleased);
+
         root.getChildren().add(canvas);
-        primaryStage.setScene(new Scene(root));
+
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     private void setup(GraphicsContext gc) {
+        Canvas canvas = gc.getCanvas();
+
+        // Instantiate bats
+        double batSpacingX = 30;
+        leftBat = new Bat(gc, batSpacingX);
+        rightBat = new Bat(gc, canvas.getWidth() - batSpacingX);
+    }
+
+    private void draw(GraphicsContext gc, double delta) {
         Canvas canvas = gc.getCanvas();
 
         // Draw background
@@ -61,15 +76,8 @@ public class Main extends Application {
         gc.strokeLine(canvas.getWidth() / 2, centreLineSpacing, canvas.getWidth() / 2,
                 canvas.getHeight() - centreLineSpacing);
 
-        // Instantiate bats
-        double batSpacingX = 30;
-        leftBat = new Bat(gc, batSpacingX);
-        rightBat = new Bat(gc, canvas.getWidth() - batSpacingX);
-    }
-
-    private void draw(GraphicsContext gc, double delta) {
-        leftBat.update(gc, delta);
-        rightBat.update(gc, delta);
+        leftBat.update(gc, delta, input);
+        rightBat.update(gc, delta, input);
 
         leftBat.draw(gc);
         rightBat.draw(gc);

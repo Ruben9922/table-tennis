@@ -3,11 +3,12 @@ package uk.co.rubendougall.tabletennis;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 class Bat {
     private static final double BAT_LENGTH = 80;
-    private static final Point2D VELOCITY = new Point2D(20, 0);
+    private static final double VELOCITY = 3;
 
     private Point2D position;
 
@@ -17,8 +18,14 @@ class Bat {
         position = new Point2D(positionX, (canvas.getHeight() - Bat.BAT_LENGTH) / 2);
     }
 
-    void update(GraphicsContext gc, double delta) {
+    void update(GraphicsContext gc, double delta, Input input) {
         Canvas canvas = gc.getCanvas();
+
+        if (input.isKeyPressed(KeyCode.UP)) {
+            position = position.subtract(0, VELOCITY * delta);
+        } else if (input.isKeyPressed(KeyCode.DOWN)) {
+            position = position.add(0, VELOCITY * delta);
+        }
 
         // Clamp y-position
         double BAT_SPACING = 30;
