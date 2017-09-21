@@ -57,6 +57,10 @@ public class Main extends Application {
         double centreLineSpacing = 30;
         gc.strokeLine(canvas.getWidth() / 2, centreLineSpacing, canvas.getWidth() / 2,
                 canvas.getHeight() - centreLineSpacing);
+    }
+
+    private void draw(GraphicsContext gc, double delta) {
+        Canvas canvas = gc.getCanvas();
 
         // Draw bats
         gc.setStroke(Color.grayRgb(255));
@@ -70,9 +74,5 @@ public class Main extends Application {
         Point2D rightBatEnd = new Point2D(rightBatStart.getX(), rightBatStart.getY() + batLength);
         gc.strokeLine(leftBatStart.getX(), leftBatStart.getY(), leftBatEnd.getX(), leftBatEnd.getY());
         gc.strokeLine(rightBatStart.getX(), rightBatStart.getY(), rightBatEnd.getX(), rightBatEnd.getY());
-    }
-
-    private void draw(GraphicsContext gc, double delta) {
-
     }
 }
