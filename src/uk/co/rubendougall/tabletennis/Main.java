@@ -12,10 +12,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    private double lastTime = System.nanoTime();
+    private Input input = new Input();
     private Bat leftBat;
     private Bat rightBat;
-    private Input input = new Input();
-    private double lastTime = System.nanoTime();
+    private Ball ball;
 
     public static void main(String[] args) {
         launch(args);
@@ -59,10 +60,12 @@ public class Main extends Application {
     private void setup(GraphicsContext gc) {
         Canvas canvas = gc.getCanvas();
 
+        // TODO: Possibly remove setup method
         // Instantiate bats
         double batSpacingX = 30;
         leftBat = new Bat(gc, batSpacingX);
         rightBat = new Bat(gc, canvas.getWidth() - batSpacingX);
+        ball = new Ball(gc);
     }
 
     private void draw(GraphicsContext gc, double delta) {
@@ -86,8 +89,10 @@ public class Main extends Application {
 
         leftBat.update(gc, delta, input, KeyCode.W, KeyCode.S);
         rightBat.update(gc, delta, input, KeyCode.UP, KeyCode.DOWN);
+        ball.update(gc, delta);
 
         leftBat.draw(gc);
         rightBat.draw(gc);
+        ball.draw(gc);
     }
 }
