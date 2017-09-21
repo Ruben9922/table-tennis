@@ -34,7 +34,7 @@ class Ball {
         position = position.add(velocity.getX(), velocity.getY());
     }
 
-    void draw(GraphicsContext gc) {
+    void render(GraphicsContext gc) {
         gc.setFill(Color.grayRgb(255));
         gc.fillOval(position.getX(), position.getY(), 8, 8);
     }

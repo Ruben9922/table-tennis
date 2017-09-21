@@ -37,7 +37,7 @@ public class Main extends Application {
             @Override
             public void handle(long currentTime) {
                 double delta = calculateDelta(currentTime);
-                draw(gc, delta);
+                render(gc, delta);
 
             }
         }.start();
@@ -68,7 +68,7 @@ public class Main extends Application {
         ball = new Ball(gc);
     }
 
-    private void draw(GraphicsContext gc, double delta) {
+    private void render(GraphicsContext gc, double delta) {
         Canvas canvas = gc.getCanvas();
 
         // Draw background
@@ -91,8 +91,8 @@ public class Main extends Application {
         rightBat.update(gc, delta, input, KeyCode.UP, KeyCode.DOWN);
         ball.update(gc, delta);
 
-        leftBat.draw(gc);
-        rightBat.draw(gc);
-        ball.draw(gc);
+        leftBat.render(gc);
+        rightBat.render(gc);
+        ball.render(gc);
     }
 }

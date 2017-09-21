@@ -32,7 +32,7 @@ class Bat {
         position = new Point2D(position.getX(), Utilities.constrain(position.getY(), BAT_SPACING, canvas.getHeight() - BAT_SPACING - BAT_LENGTH));
     }
 
-    void draw(GraphicsContext gc) {
+    void render(GraphicsContext gc) {
         gc.setStroke(Color.grayRgb(255));
         gc.strokeLine(position.getX(), position.getY(), position.getX(), position.getY() + BAT_LENGTH);
     }
