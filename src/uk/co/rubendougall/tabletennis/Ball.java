@@ -34,12 +34,20 @@ class Ball {
     }
 
     void update(double delta) {
-        // TODO: Check if on bat or top/bottom edge
+        // TODO: Check if on top/bottom edge
         // TODO: Check for goal
 
         position = position.add(velocity.multiply(delta));
 
         shape.setCenterX(position.getX());
         shape.setCenterY(position.getY());
+    }
+
+    void changeXDirection() {
+        velocity = new Point2D(-velocity.getX(), velocity.getY());
+    }
+
+    void changeYDirection() {
+        velocity = new Point2D(velocity.getX(), -velocity.getY());
     }
 }

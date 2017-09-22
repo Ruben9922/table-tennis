@@ -87,6 +87,13 @@ public class Main extends Application {
         gc.strokeLine(canvas.getWidth() / 2, centreLineSpacing, canvas.getWidth() / 2,
                 canvas.getHeight() - centreLineSpacing);
 
+        // Check if on bat
+        // TODO: Replace with `Shape.intersect`
+        if (ball.getShape().getBoundsInParent().intersects(leftBat.getShape().getBoundsInParent())
+                || ball.getShape().getBoundsInParent().intersects(rightBat.getShape().getBoundsInParent())) {
+            ball.changeXDirection();
+        }
+
         leftBat.update(gc, delta, input, KeyCode.W, KeyCode.S);
         rightBat.update(gc, delta, input, KeyCode.UP, KeyCode.DOWN);
         ball.update(delta);
