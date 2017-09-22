@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.util.Random;
 
@@ -11,9 +12,14 @@ class Ball {
     private Point2D position;
     private Point2D velocity;
     private Random random = new Random();
+    private Circle shape = new Circle(4, Color.grayRgb(255));
 
     Ball(GraphicsContext gc) {
         reset(gc);
+    }
+
+    Circle getShape() {
+        return shape;
     }
 
     void reset(GraphicsContext gc) {
@@ -27,15 +33,13 @@ class Ball {
         velocity = new Point2D(speedX, (random.nextDouble() * maxSpeedY) - (maxSpeedY / 2)); // TODO: Check this
     }
 
-    void update(GraphicsContext gc, double delta) {
+    void update(double delta) {
         // TODO: Check if on bat or top/bottom edge
         // TODO: Check for goal
 
         position = position.add(velocity.multiply(delta));
-    }
 
-    void render(GraphicsContext gc) {
-        gc.setFill(Color.grayRgb(255));
-        gc.fillOval(position.getX(), position.getY(), 8, 8);
+        shape.setCenterX(position.getX());
+        shape.setCenterY(position.getY());
     }
 }

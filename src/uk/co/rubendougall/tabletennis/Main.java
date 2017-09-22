@@ -45,7 +45,7 @@ public class Main extends Application {
         scene.setOnKeyPressed(input::handleKeyPressed);
         scene.setOnKeyReleased(input::handleKeyReleased);
 
-        root.getChildren().add(canvas);
+        root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape());
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -89,10 +89,6 @@ public class Main extends Application {
 
         leftBat.update(gc, delta, input, KeyCode.W, KeyCode.S);
         rightBat.update(gc, delta, input, KeyCode.UP, KeyCode.DOWN);
-        ball.update(gc, delta);
-
-        leftBat.render(gc);
-        rightBat.render(gc);
-        ball.render(gc);
+        ball.update(delta);
     }
 }
