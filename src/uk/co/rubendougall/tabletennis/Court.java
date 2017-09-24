@@ -6,24 +6,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 class Court {
-    private Line topEdge;
-    private Line bottomEdge;
-    private Line leftEdge;
-    private Line rightEdge;
+    private Line topLine;
+    private Line bottomLine;
+    private Line leftLine;
+    private Line rightLine;
     private Line centreLine;
 
     Court(Canvas canvas) {
         // Draw court edge
         Color colour = Color.grayRgb(140);
         Point2D edgeSpacing = new Point2D(20, 20);
-        topEdge = new Line(edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), edgeSpacing.getY());
-        topEdge.setStroke(colour);
-        bottomEdge = new Line(edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
-        bottomEdge.setStroke(colour);
-        leftEdge = new Line(edgeSpacing.getX(), edgeSpacing.getY(), edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
-        leftEdge.setStroke(colour);
-        rightEdge = new Line(canvas.getWidth() - edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
-        rightEdge.setStroke(colour);
+        topLine = new Line(edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), edgeSpacing.getY());
+        topLine.setStroke(colour);
+        bottomLine = new Line(edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
+        bottomLine.setStroke(colour);
+        leftLine = new Line(edgeSpacing.getX(), edgeSpacing.getY(), edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
+        leftLine.setStroke(colour);
+        rightLine = new Line(canvas.getWidth() - edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
+        rightLine.setStroke(colour);
 
         // Draw centre line
         double centreLineSpacing = 30;
@@ -32,20 +32,20 @@ class Court {
         centreLine.setStroke(colour);
     }
 
-    Line getTopEdge() {
-        return topEdge;
+    Line getTopLine() {
+        return topLine;
     }
 
-    Line getBottomEdge() {
-        return bottomEdge;
+    Line getBottomLine() {
+        return bottomLine;
     }
 
-    Line getLeftEdge() {
-        return leftEdge;
+    Line getLeftLine() {
+        return leftLine;
     }
 
-    Line getRightEdge() {
-        return rightEdge;
+    Line getRightLine() {
+        return rightLine;
     }
 
     Line getCentreLine() {

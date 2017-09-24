@@ -46,8 +46,8 @@ public class Main extends Application {
         scene.setOnKeyPressed(input::handleKeyPressed);
         scene.setOnKeyReleased(input::handleKeyReleased);
 
-        root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopEdge(),
-                court.getBottomEdge(), court.getLeftEdge(), court.getRightEdge(), court.getCentreLine());
+        root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopLine(),
+                court.getBottomLine(), court.getLeftLine(), court.getRightLine(), court.getCentreLine());
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -89,14 +89,14 @@ public class Main extends Application {
         }
 
         // Check if on top or bottom edge
-        if (checkForCollision(ball.getShape(), court.getTopEdge())
-                || checkForCollision(ball.getShape(), court.getBottomEdge())) {
+        if (checkForCollision(ball.getShape(), court.getTopLine())
+                || checkForCollision(ball.getShape(), court.getBottomLine())) {
             ball.changeYDirection();
         }
 
         // Check for goal
-        if (checkForCollision(ball.getShape(), court.getLeftEdge())
-                || checkForCollision(ball.getShape(), court.getRightEdge())) {
+        if (checkForCollision(ball.getShape(), court.getLeftLine())
+                || checkForCollision(ball.getShape(), court.getRightLine())) {
             ball.reset();
         }
 
