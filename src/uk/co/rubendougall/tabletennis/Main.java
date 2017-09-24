@@ -32,7 +32,12 @@ public class Main extends Application {
         Canvas canvas = new Canvas(800, 500);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        setup(gc);
+        // Instantiate bats
+        double batSpacingX = 30;
+        leftBat = new Bat(gc.getCanvas(), batSpacingX);
+        rightBat = new Bat(gc.getCanvas(), canvas.getWidth() - batSpacingX);
+        ball = new Ball(gc.getCanvas());
+        court = new Court(gc.getCanvas());
 
         new AnimationTimer() {
             @Override
@@ -57,18 +62,6 @@ public class Main extends Application {
         double delta = (currentTime - lastTime) / 1000000.0;
         lastTime = currentTime;
         return delta;
-    }
-
-    private void setup(GraphicsContext gc) {
-        Canvas canvas = gc.getCanvas();
-
-        // TODO: Possibly remove setup method
-        // Instantiate bats
-        double batSpacingX = 30;
-        leftBat = new Bat(gc.getCanvas(), batSpacingX);
-        rightBat = new Bat(gc.getCanvas(), canvas.getWidth() - batSpacingX);
-        ball = new Ball(gc.getCanvas());
-        court = new Court(gc.getCanvas());
     }
 
     private static boolean checkForCollision(Shape shape1, Shape shape2) {
