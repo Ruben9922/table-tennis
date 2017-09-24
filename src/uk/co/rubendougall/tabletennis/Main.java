@@ -25,7 +25,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Court Tennis");
+        primaryStage.setTitle("Table Tennis");
 
         Group root = new Group();
         Scene scene = new Scene(root);
