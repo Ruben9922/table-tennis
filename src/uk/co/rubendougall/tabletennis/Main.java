@@ -32,7 +32,6 @@ public class Main extends Application {
         Canvas canvas = new Canvas(800, 500);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        // Instantiate bats
         double batSpacingX = 30;
         leftBat = new Bat(gc.getCanvas(), batSpacingX);
         rightBat = new Bat(gc.getCanvas(), canvas.getWidth() - batSpacingX);
