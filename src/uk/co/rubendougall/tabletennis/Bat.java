@@ -34,7 +34,7 @@ class Bat {
         }
 
         // Clamp y-position
-        double BAT_SPACING = 30;
+        double BAT_SPACING = 25;
         position = new Point2D(position.getX(), Utilities.constrain(position.getY(), BAT_SPACING, canvas.getHeight() - BAT_SPACING - BAT_LENGTH));
 
         shape.setStartX(position.getX());
