@@ -32,7 +32,7 @@ public class Main extends Application {
         Canvas canvas = new Canvas(800, 500);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        double batSpacingX = 30;
+        final double batSpacingX = 30;
         leftBat = new Bat(gc.getCanvas(), batSpacingX);
         rightBat = new Bat(gc.getCanvas(), canvas.getWidth() - batSpacingX);
         ball = new Ball(gc.getCanvas());

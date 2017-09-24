@@ -14,8 +14,8 @@ class Court {
 
     Court(Canvas canvas) {
         // Draw court edge
-        Color colour = Color.grayRgb(140);
-        Point2D edgeSpacing = new Point2D(20, 20);
+        final Point2D edgeSpacing = new Point2D(20, 20);
+        final Color colour = Color.grayRgb(140);
         topLine = new Line(edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), edgeSpacing.getY());
         topLine.setStroke(colour);
         bottomLine = new Line(edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
@@ -26,7 +26,7 @@ class Court {
         rightLine.setStroke(colour);
 
         // Draw centre line
-        double centreLineSpacing = 30;
+        final double centreLineSpacing = 30;
         centreLine = new Line(canvas.getWidth() / 2, centreLineSpacing, canvas.getWidth() / 2,
                 canvas.getHeight() - centreLineSpacing);
         centreLine.setStroke(colour);
