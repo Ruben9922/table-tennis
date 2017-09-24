@@ -88,6 +88,12 @@ public class Main extends Application {
             ball.changeXDirection();
         }
 
+        // Check if on top or bottom edge
+        if (checkForCollision(ball.getShape(), court.getTopEdge())
+                || checkForCollision(ball.getShape(), court.getBottomEdge())) {
+            ball.changeYDirection();
+        }
+
         // Check for goal
         if (checkForCollision(ball.getShape(), court.getLeftEdge())
                 || checkForCollision(ball.getShape(), court.getRightEdge())) {

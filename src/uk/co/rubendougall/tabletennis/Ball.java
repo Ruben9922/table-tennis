@@ -34,8 +34,6 @@ class Ball {
     }
 
     void update(double delta) {
-        // TODO: Check if on top/bottom edge
-
         position = position.add(velocity.multiply(delta));
 
         shape.setCenterX(position.getX());
