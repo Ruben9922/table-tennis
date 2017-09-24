@@ -6,7 +6,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 class Court {
-    private Canvas canvas;
     private Line topEdge;
     private Line bottomEdge;
     private Line leftEdge;
@@ -14,8 +13,6 @@ class Court {
     private Line centreLine;
 
     Court(Canvas canvas) {
-        this.canvas = canvas;
-
         // Draw court edge
         Color colour = Color.grayRgb(140);
         Point2D edgeSpacing = new Point2D(20, 20);
