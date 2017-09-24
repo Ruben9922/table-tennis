@@ -30,7 +30,7 @@ class Ball {
 
         // TODO: Choose x-direction properly
         position = new Point2D(canvas.getWidth() / 2, canvas.getHeight() / 2);
-        velocity = new Point2D(speedX, (random.nextDouble() * maxSpeedY) - (maxSpeedY / 2)); // TODO: Check this
+        velocity = new Point2D(speedX, (random.nextDouble() * maxSpeedY) - (maxSpeedY / 2));
     }
 
     void update(double delta) {
