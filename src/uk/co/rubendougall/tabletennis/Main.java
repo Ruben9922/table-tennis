@@ -70,8 +70,8 @@ public class Main extends Application {
         court = new Court();
     }
 
-    private static boolean checkForCollision(Ball ball, Bat leftBat) {
-        return Shape.intersect(ball.getShape(), leftBat.getShape()).getBoundsInLocal().getWidth() != -1;
+    private static boolean checkForCollision(Shape shape1, Shape shape2) {
+        return Shape.intersect(shape1, shape2).getBoundsInLocal().getWidth() != -1;
     }
 
     private void render(GraphicsContext gc, double delta) {
@@ -82,7 +82,8 @@ public class Main extends Application {
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         // Check if on bat
-        if (checkForCollision(ball, leftBat) || checkForCollision(ball, rightBat)) {
+        if (checkForCollision(ball.getShape(), leftBat.getShape())
+                || checkForCollision(ball.getShape(), rightBat.getShape())) {
             ball.changeXDirection();
         }
 
