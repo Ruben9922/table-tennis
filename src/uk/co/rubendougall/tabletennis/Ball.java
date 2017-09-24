@@ -2,21 +2,20 @@ package uk.co.rubendougall.tabletennis;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.util.Random;
 
 class Ball {
-    private GraphicsContext gc;
+    private Canvas canvas;
     private Point2D position;
     private Point2D velocity;
     private Random random = new Random();
     private Circle shape = new Circle(4, Color.grayRgb(255));
 
-    Ball(GraphicsContext gc) {
-        this.gc = gc;
+    Ball(Canvas canvas) {
+        this.canvas = canvas;
 
         reset();
     }
@@ -26,8 +25,6 @@ class Ball {
     }
 
     void reset() {
-        Canvas canvas = gc.getCanvas();
-
         final double speedX = 0.3;
         final double maxSpeedY = 0.5;
 

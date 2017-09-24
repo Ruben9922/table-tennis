@@ -64,9 +64,9 @@ public class Main extends Application {
         // TODO: Possibly remove setup method
         // Instantiate bats
         double batSpacingX = 30;
-        leftBat = new Bat(gc, batSpacingX);
-        rightBat = new Bat(gc, canvas.getWidth() - batSpacingX);
-        ball = new Ball(gc);
+        leftBat = new Bat(gc.getCanvas(), batSpacingX);
+        rightBat = new Bat(gc.getCanvas(), canvas.getWidth() - batSpacingX);
+        ball = new Ball(gc.getCanvas());
         court = new Court();
     }
 
