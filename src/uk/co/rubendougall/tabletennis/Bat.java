@@ -11,12 +11,14 @@ class Bat {
     private static final double BAT_LENGTH = 80;
     private static final double VELOCITY = 1.2;
 
+    private GraphicsContext gc;
     private Point2D position;
     private Line shape = new Line();
 
     Bat(GraphicsContext gc, final double positionX) {
-        Canvas canvas = gc.getCanvas();
+        this.gc = gc;
 
+        Canvas canvas = gc.getCanvas();
         position = new Point2D(positionX, (canvas.getHeight() - Bat.BAT_LENGTH) / 2);
 
         shape.setStroke(Color.grayRgb(255));
@@ -26,7 +28,7 @@ class Bat {
         return shape;
     }
 
-    void update(GraphicsContext gc, double delta, Input input, KeyCode moveUpCode, KeyCode moveDownCode) {
+    void update(double delta, Input input, KeyCode moveUpCode, KeyCode moveDownCode) {
         Canvas canvas = gc.getCanvas();
 
         if (input.isKeyPressed(moveUpCode)) {

@@ -9,20 +9,23 @@ import javafx.scene.shape.Circle;
 import java.util.Random;
 
 class Ball {
+    private GraphicsContext gc;
     private Point2D position;
     private Point2D velocity;
     private Random random = new Random();
     private Circle shape = new Circle(4, Color.grayRgb(255));
 
     Ball(GraphicsContext gc) {
-        reset(gc);
+        this.gc = gc;
+
+        reset();
     }
 
     Circle getShape() {
         return shape;
     }
 
-    void reset(GraphicsContext gc) {
+    void reset() {
         Canvas canvas = gc.getCanvas();
 
         final double speedX = 0.3;

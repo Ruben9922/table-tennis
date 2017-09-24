@@ -87,8 +87,8 @@ public class Main extends Application {
             ball.changeXDirection();
         }
 
-        leftBat.update(gc, delta, input, KeyCode.W, KeyCode.S);
-        rightBat.update(gc, delta, input, KeyCode.UP, KeyCode.DOWN);
+        leftBat.update(delta, input, KeyCode.W, KeyCode.S);
+        rightBat.update(delta, input, KeyCode.UP, KeyCode.DOWN);
         ball.update(delta);
 
         court.render(gc);
