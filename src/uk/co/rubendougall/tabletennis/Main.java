@@ -9,6 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -88,9 +89,8 @@ public class Main extends Application {
                 canvas.getHeight() - centreLineSpacing);
 
         // Check if on bat
-        // TODO: Replace with `Shape.intersect`
-        if (ball.getShape().getBoundsInParent().intersects(leftBat.getShape().getBoundsInParent())
-                || ball.getShape().getBoundsInParent().intersects(rightBat.getShape().getBoundsInParent())) {
+        if (Shape.intersect(ball.getShape(), leftBat.getShape()).getBoundsInLocal().getWidth() != -1
+                || Shape.intersect(ball.getShape(), rightBat.getShape()).getBoundsInLocal().getWidth() != -1) {
             ball.changeXDirection();
         }
 
