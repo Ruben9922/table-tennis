@@ -88,6 +88,12 @@ public class Main extends Application {
             ball.changeXDirection();
         }
 
+        // Check for goal
+        if (checkForCollision(ball.getShape(), court.getLeftEdge())
+                || checkForCollision(ball.getShape(), court.getRightEdge())) {
+            ball.reset();
+        }
+
         leftBat.update(delta, input, KeyCode.W, KeyCode.S);
         rightBat.update(delta, input, KeyCode.UP, KeyCode.DOWN);
         ball.update(delta);

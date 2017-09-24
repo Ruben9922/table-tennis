@@ -35,7 +35,6 @@ class Ball {
 
     void update(double delta) {
         // TODO: Check if on top/bottom edge
-        // TODO: Check for goal
 
         position = position.add(velocity.multiply(delta));
 
