@@ -46,7 +46,8 @@ public class Main extends Application {
         scene.setOnKeyPressed(input::handleKeyPressed);
         scene.setOnKeyReleased(input::handleKeyReleased);
 
-        root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape());
+        root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopEdge(),
+                court.getBottomEdge(), court.getLeftEdge(), court.getRightEdge(), court.getCentreLine());
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -67,7 +68,7 @@ public class Main extends Application {
         leftBat = new Bat(gc.getCanvas(), batSpacingX);
         rightBat = new Bat(gc.getCanvas(), canvas.getWidth() - batSpacingX);
         ball = new Ball(gc.getCanvas());
-        court = new Court();
+        court = new Court(gc.getCanvas());
     }
 
     private static boolean checkForCollision(Shape shape1, Shape shape2) {
@@ -90,7 +91,5 @@ public class Main extends Application {
         leftBat.update(delta, input, KeyCode.W, KeyCode.S);
         rightBat.update(delta, input, KeyCode.UP, KeyCode.DOWN);
         ball.update(delta);
-
-        court.render(gc);
     }
 }

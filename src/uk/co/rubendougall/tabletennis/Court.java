@@ -2,30 +2,56 @@ package uk.co.rubendougall.tabletennis;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 class Court {
-    private GraphicsContext gc;
+    private Canvas canvas;
+    private Line topEdge;
+    private Line bottomEdge;
+    private Line leftEdge;
+    private Line rightEdge;
     private Line centreLine;
 
-    public Court(GraphicsContext gc) {
-        this.gc = gc;
-
-        Canvas canvas = gc.getCanvas();
+    Court(Canvas canvas) {
+        this.canvas = canvas;
 
         // Draw court edge
-        gc.setStroke(Color.grayRgb(140));
+        Color colour = Color.grayRgb(140);
         Point2D edgeSpacing = new Point2D(20, 20);
-        gc.strokeRect(edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - (2 * edgeSpacing.getX()),
-                canvas.getHeight() - (2 * edgeSpacing.getY()));
-
+        topEdge = new Line(edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), edgeSpacing.getY());
+        topEdge.setStroke(colour);
+        bottomEdge = new Line(edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
+        bottomEdge.setStroke(colour);
+        leftEdge = new Line(edgeSpacing.getX(), edgeSpacing.getY(), edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
+        leftEdge.setStroke(colour);
+        rightEdge = new Line(canvas.getWidth() - edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
+        rightEdge.setStroke(colour);
 
         // Draw centre line
         double centreLineSpacing = 30;
         centreLine = new Line(canvas.getWidth() / 2, centreLineSpacing, canvas.getWidth() / 2,
                 canvas.getHeight() - centreLineSpacing);
-        centreLine.setStroke(Color.grayRgb(140));
+        centreLine.setStroke(colour);
+    }
+
+    Line getTopEdge() {
+        return topEdge;
+    }
+
+    Line getBottomEdge() {
+        return bottomEdge;
+    }
+
+    Line getLeftEdge() {
+        return leftEdge;
+    }
+
+    Line getRightEdge() {
+        return rightEdge;
+    }
+
+    Line getCentreLine() {
+        return centreLine;
     }
 }
