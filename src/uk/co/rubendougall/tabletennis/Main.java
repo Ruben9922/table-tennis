@@ -2,7 +2,6 @@ package uk.co.rubendougall.tabletennis;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -18,6 +17,7 @@ public class Main extends Application {
     private Bat leftBat;
     private Bat rightBat;
     private Ball ball;
+    private Court court;
 
     public static void main(String[] args) {
         launch(args);
@@ -25,7 +25,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Table Tennis");
+        primaryStage.setTitle("Court Tennis");
 
         Group root = new Group();
         Scene scene = new Scene(root);
@@ -67,6 +67,7 @@ public class Main extends Application {
         leftBat = new Bat(gc, batSpacingX);
         rightBat = new Bat(gc, canvas.getWidth() - batSpacingX);
         ball = new Ball(gc);
+        court = new Court();
     }
 
     private void render(GraphicsContext gc, double delta) {
@@ -75,18 +76,6 @@ public class Main extends Application {
         // Draw background
         gc.setFill(Color.grayRgb(50));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-        // Draw court edge
-        gc.setStroke(Color.grayRgb(140));
-        Point2D edgeSpacing = new Point2D(20, 20);
-        gc.strokeRect(edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - (2 * edgeSpacing.getX()),
-                canvas.getHeight() - (2 * edgeSpacing.getY()));
-
-        // Draw centre line
-        gc.setStroke(Color.grayRgb(140));
-        double centreLineSpacing = 30;
-        gc.strokeLine(canvas.getWidth() / 2, centreLineSpacing, canvas.getWidth() / 2,
-                canvas.getHeight() - centreLineSpacing);
 
         // Check if on bat
         if (Shape.intersect(ball.getShape(), leftBat.getShape()).getBoundsInLocal().getWidth() != -1
@@ -97,5 +86,7 @@ public class Main extends Application {
         leftBat.update(gc, delta, input, KeyCode.W, KeyCode.S);
         rightBat.update(gc, delta, input, KeyCode.UP, KeyCode.DOWN);
         ball.update(delta);
+
+        court.render(gc);
     }
 }
