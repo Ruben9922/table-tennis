@@ -120,12 +120,12 @@ public class Main extends Application {
 
         // Check for goal and increment relevant score
         if (checkForCollision(ball.getShape(), court.getLeftLine())) {
-            ball.reset();
+            ball.reset(false);
             rightScore.set(rightScore.getValue() + 1);
         }
 
         if (checkForCollision(ball.getShape(), court.getRightLine())) {
-            ball.reset();
+            ball.reset(true);
             leftScore.set(leftScore.getValue() + 1);
         }
 

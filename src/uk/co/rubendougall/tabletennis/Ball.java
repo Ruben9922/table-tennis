@@ -17,20 +17,20 @@ class Ball {
     Ball(Canvas canvas) {
         this.canvas = canvas;
 
-        reset();
+        boolean negateSpeed = random.nextInt() >= 0.5;
+        reset(negateSpeed);
     }
 
     Circle getShape() {
         return shape;
     }
 
-    void reset() {
+    void reset(boolean negateSpeed) {
         final double speedX = 0.3;
         final double maxSpeedY = 0.5;
 
-        // TODO: Choose x-direction properly
         position = new Point2D(canvas.getWidth() / 2, canvas.getHeight() / 2);
-        velocity = new Point2D(speedX, (random.nextDouble() * maxSpeedY) - (maxSpeedY / 2));
+        velocity = new Point2D(negateSpeed ? -speedX : speedX, (random.nextDouble() * maxSpeedY) - (maxSpeedY / 2));
     }
 
     void update(double delta) {
