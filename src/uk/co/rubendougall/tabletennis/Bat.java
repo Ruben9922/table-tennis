@@ -8,7 +8,7 @@ import javafx.scene.shape.Line;
 
 class Bat {
     private static final double BAT_LENGTH = 80;
-    private static final double VELOCITY = 0.7;
+    private static final double SPEED = 0.7;
 
     private Canvas canvas;
     private Point2D position;
@@ -28,9 +28,9 @@ class Bat {
 
     void update(double delta, Input input, KeyCode moveUpCode, KeyCode moveDownCode) {
         if (input.isKeyPressed(moveUpCode)) {
-            position = position.subtract(0, VELOCITY * delta);
+            position = position.subtract(0, SPEED * delta);
         } else if (input.isKeyPressed(moveDownCode)) {
-            position = position.add(0, VELOCITY * delta);
+            position = position.add(0, SPEED * delta);
         }
 
         // Clamp y-position
