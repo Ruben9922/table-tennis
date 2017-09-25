@@ -8,7 +8,7 @@ import javafx.scene.shape.Line;
 
 class Bat {
     private static final double BAT_LENGTH = 80;
-    private static final double VELOCITY = 1.2;
+    private static final double VELOCITY = 0.7;
 
     private Canvas canvas;
     private Point2D position;
