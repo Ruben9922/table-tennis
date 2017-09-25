@@ -86,6 +86,7 @@ public class Main extends Application {
                 court.getBottomLine(), court.getLeftLine(), court.getRightLine(), court.getCentreLine(), scoreAnchorPane);
 
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
