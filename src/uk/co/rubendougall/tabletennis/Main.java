@@ -2,13 +2,21 @@ package uk.co.rubendougall.tabletennis;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Point2D;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -18,6 +26,10 @@ public class Main extends Application {
     private Bat rightBat;
     private Ball ball;
     private Court court;
+    private Text leftScoreLabel = new Text();
+    private Text rightScoreLabel = new Text();
+    private IntegerProperty leftScore = new SimpleIntegerProperty(0);
+    private IntegerProperty rightScore = new SimpleIntegerProperty(0);
 
     public static void main(String[] args) {
         launch(args);
@@ -38,6 +50,26 @@ public class Main extends Application {
         ball = new Ball(gc.getCanvas());
         court = new Court(gc.getCanvas());
 
+        final Point2D textSpacing = new Point2D(10, 2);
+        leftScoreLabel.setFill(Color.grayRgb(255));
+        leftScoreLabel.setFont(Font.getDefault());
+        leftScoreLabel.setTextAlignment(TextAlignment.CENTER);
+        leftScoreLabel.setTextOrigin(VPos.TOP);
+        leftScoreLabel.textProperty().bind(leftScore.asString());
+        rightScoreLabel.setFill(Color.grayRgb(255));
+        rightScoreLabel.setFont(Font.getDefault());
+        rightScoreLabel.setTextAlignment(TextAlignment.CENTER);
+        rightScoreLabel.setTextOrigin(VPos.TOP);
+        rightScoreLabel.textProperty().bind(rightScore.asString());
+
+        AnchorPane scoreAnchorPane = new AnchorPane(leftScoreLabel, rightScoreLabel);
+        AnchorPane.setLeftAnchor(leftScoreLabel, textSpacing.getX());
+        AnchorPane.setTopAnchor(leftScoreLabel, textSpacing.getY());
+        AnchorPane.setRightAnchor(rightScoreLabel, textSpacing.getX());
+        AnchorPane.setTopAnchor(rightScoreLabel, textSpacing.getY());
+        scoreAnchorPane.prefWidthProperty().bind(scene.widthProperty());
+        scoreAnchorPane.prefHeightProperty().bind(scene.heightProperty());
+
         new AnimationTimer() {
             @Override
             public void handle(long currentTime) {
@@ -51,7 +83,7 @@ public class Main extends Application {
         scene.setOnKeyReleased(input::handleKeyReleased);
 
         root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopLine(),
-                court.getBottomLine(), court.getLeftLine(), court.getRightLine(), court.getCentreLine());
+                court.getBottomLine(), court.getLeftLine(), court.getRightLine(), court.getCentreLine(), scoreAnchorPane);
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -86,10 +118,15 @@ public class Main extends Application {
             ball.changeYDirection();
         }
 
-        // Check for goal
-        if (checkForCollision(ball.getShape(), court.getLeftLine())
-                || checkForCollision(ball.getShape(), court.getRightLine())) {
+        // Check for goal and increment relevant score
+        if (checkForCollision(ball.getShape(), court.getLeftLine())) {
             ball.reset();
+            rightScore.set(rightScore.getValue() + 1);
+        }
+
+        if (checkForCollision(ball.getShape(), court.getRightLine())) {
+            ball.reset();
+            leftScore.set(leftScore.getValue() + 1);
         }
 
         leftBat.update(delta, input, KeyCode.W, KeyCode.S);
