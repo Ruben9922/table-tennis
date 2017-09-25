@@ -7,6 +7,7 @@ import javafx.scene.shape.Circle;
 
 import java.util.Random;
 
+// TODO: Fix ball not starting from centre when application started
 class Ball {
     private Canvas canvas;
     private Point2D position;
