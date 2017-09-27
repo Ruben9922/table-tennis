@@ -18,7 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-class Game {
+class Game implements Screen {
     private Scene scene;
     private double lastTime = System.nanoTime();
     private Input input = new Input();
@@ -84,7 +84,7 @@ class Game {
         return Shape.intersect(shape1, shape2).getBoundsInLocal().getWidth() != -1;
     }
 
-    Scene getScene() {
+    public Scene getScene() {
         return scene;
     }
 
