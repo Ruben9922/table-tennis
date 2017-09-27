@@ -84,6 +84,7 @@ class Game implements Screen {
         return Shape.intersect(shape1, shape2).getBoundsInLocal().getWidth() != -1;
     }
 
+    @Override
     public Scene getScene() {
         return scene;
     }
