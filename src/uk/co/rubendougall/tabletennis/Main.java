@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     private Game game;
+    private Menu menu;
 
     public static void main(String[] args) {
         launch(args);
@@ -14,8 +15,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Table Tennis");
 
-        game = new Game();
-        primaryStage.setScene(game.getScene());
+        menu = new Menu();
+        primaryStage.setScene(menu.getScene());
 
         primaryStage.setResizable(false);
         primaryStage.show();
