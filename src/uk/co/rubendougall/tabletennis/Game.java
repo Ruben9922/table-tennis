@@ -3,6 +3,7 @@ package uk.co.rubendougall.tabletennis;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
@@ -31,13 +32,13 @@ class Game {
     Game() {
         Group root = new Group();
         scene = new Scene(root);
-        Canvas canvas = new Canvas(800, 500);
+        Dimension2D dimensions = new Dimension2D(800, 500);
 
         final double batSpacingX = 30;
-        leftBat = new Bat(canvas, batSpacingX);
-        rightBat = new Bat(canvas, canvas.getWidth() - batSpacingX);
-        ball = new Ball(canvas);
-        court = new Court(canvas);
+        leftBat = new Bat(dimensions, batSpacingX);
+        rightBat = new Bat(dimensions, dimensions.getWidth() - batSpacingX);
+        ball = new Ball(dimensions);
+        court = new Court(dimensions);
 
         final Point2D textSpacing = new Point2D(10, 2);
         Text leftScoreLabel = new Text();
@@ -61,6 +62,7 @@ class Game {
         scoreAnchorPane.prefWidthProperty().bind(scene.widthProperty());
         scoreAnchorPane.prefHeightProperty().bind(scene.heightProperty());
 
+        Canvas canvas = new Canvas(dimensions.getWidth(), dimensions.getHeight());
         root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopLine(),
                 court.getBottomLine(), court.getLeftLine(), court.getRightLine(), court.getCentreLine(), scoreAnchorPane);
 

@@ -1,7 +1,7 @@
 package uk.co.rubendougall.tabletennis;
 
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -10,14 +10,14 @@ class Bat {
     private static final double BAT_LENGTH = 80;
     private static final double SPEED = 0.7;
 
-    private Canvas canvas;
+    private Dimension2D dimensions;
     private Point2D position;
     private Line shape = new Line();
 
-    Bat(Canvas canvas, final double positionX) {
-        this.canvas = canvas;
+    Bat(Dimension2D dimensions, final double positionX) {
+        this.dimensions = dimensions;
 
-        position = new Point2D(positionX, (canvas.getHeight() - Bat.BAT_LENGTH) / 2);
+        position = new Point2D(positionX, (dimensions.getHeight() - Bat.BAT_LENGTH) / 2);
 
         shape.setStroke(Color.grayRgb(255));
     }
@@ -35,7 +35,7 @@ class Bat {
 
         // Clamp y-position
         final double batSpacing = 25;
-        position = new Point2D(position.getX(), Utilities.constrain(position.getY(), batSpacing, canvas.getHeight() - batSpacing - BAT_LENGTH));
+        position = new Point2D(position.getX(), Utilities.constrain(position.getY(), batSpacing, dimensions.getHeight() - batSpacing - BAT_LENGTH));
 
         shape.setStartX(position.getX());
         shape.setStartY(position.getY());

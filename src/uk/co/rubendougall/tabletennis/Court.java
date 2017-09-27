@@ -1,7 +1,7 @@
 package uk.co.rubendougall.tabletennis;
 
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
@@ -12,23 +12,23 @@ class Court {
     private Line rightLine;
     private Line centreLine;
 
-    Court(Canvas canvas) {
+    Court(Dimension2D dimensions) {
         // Draw court edge
         final Point2D edgeSpacing = new Point2D(20, 20);
         final Color colour = Color.grayRgb(140);
-        topLine = new Line(edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), edgeSpacing.getY());
+        topLine = new Line(edgeSpacing.getX(), edgeSpacing.getY(), dimensions.getWidth() - edgeSpacing.getX(), edgeSpacing.getY());
         topLine.setStroke(colour);
-        bottomLine = new Line(edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
+        bottomLine = new Line(edgeSpacing.getX(), dimensions.getHeight() - edgeSpacing.getY(), dimensions.getWidth() - edgeSpacing.getX(), dimensions.getHeight() - edgeSpacing.getY());
         bottomLine.setStroke(colour);
-        leftLine = new Line(edgeSpacing.getX(), edgeSpacing.getY(), edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
+        leftLine = new Line(edgeSpacing.getX(), edgeSpacing.getY(), edgeSpacing.getX(), dimensions.getHeight() - edgeSpacing.getY());
         leftLine.setStroke(colour);
-        rightLine = new Line(canvas.getWidth() - edgeSpacing.getX(), edgeSpacing.getY(), canvas.getWidth() - edgeSpacing.getX(), canvas.getHeight() - edgeSpacing.getY());
+        rightLine = new Line(dimensions.getWidth() - edgeSpacing.getX(), edgeSpacing.getY(), dimensions.getWidth() - edgeSpacing.getX(), dimensions.getHeight() - edgeSpacing.getY());
         rightLine.setStroke(colour);
 
         // Draw centre line
         final double centreLineSpacing = 30;
-        centreLine = new Line(canvas.getWidth() / 2, centreLineSpacing, canvas.getWidth() / 2,
-                canvas.getHeight() - centreLineSpacing);
+        centreLine = new Line(dimensions.getWidth() / 2, centreLineSpacing, dimensions.getWidth() / 2,
+                dimensions.getHeight() - centreLineSpacing);
         centreLine.setStroke(colour);
     }
 
