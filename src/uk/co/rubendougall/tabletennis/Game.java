@@ -25,8 +25,6 @@ class Game {
     private Bat rightBat;
     private Ball ball;
     private Court court;
-    private Text leftScoreLabel = new Text();
-    private Text rightScoreLabel = new Text();
     private IntegerProperty leftScore = new SimpleIntegerProperty(0);
     private IntegerProperty rightScore = new SimpleIntegerProperty(0);
 
@@ -43,11 +41,13 @@ class Game {
         court = new Court(gc.getCanvas());
 
         final Point2D textSpacing = new Point2D(10, 2);
+        Text leftScoreLabel = new Text();
         leftScoreLabel.setFill(Color.grayRgb(255));
         leftScoreLabel.setFont(Font.getDefault());
         leftScoreLabel.setTextAlignment(TextAlignment.CENTER);
         leftScoreLabel.setTextOrigin(VPos.TOP);
         leftScoreLabel.textProperty().bind(leftScore.asString());
+        Text rightScoreLabel = new Text();
         rightScoreLabel.setFill(Color.grayRgb(255));
         rightScoreLabel.setFont(Font.getDefault());
         rightScoreLabel.setTextAlignment(TextAlignment.CENTER);
