@@ -32,13 +32,12 @@ class Game {
         Group root = new Group();
         scene = new Scene(root);
         Canvas canvas = new Canvas(800, 500);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
 
         final double batSpacingX = 30;
-        leftBat = new Bat(gc.getCanvas(), batSpacingX);
-        rightBat = new Bat(gc.getCanvas(), canvas.getWidth() - batSpacingX);
-        ball = new Ball(gc.getCanvas());
-        court = new Court(gc.getCanvas());
+        leftBat = new Bat(canvas, batSpacingX);
+        rightBat = new Bat(canvas, canvas.getWidth() - batSpacingX);
+        ball = new Ball(canvas);
+        court = new Court(canvas);
 
         final Point2D textSpacing = new Point2D(10, 2);
         Text leftScoreLabel = new Text();
@@ -62,6 +61,10 @@ class Game {
         scoreAnchorPane.prefWidthProperty().bind(scene.widthProperty());
         scoreAnchorPane.prefHeightProperty().bind(scene.heightProperty());
 
+        root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopLine(),
+                court.getBottomLine(), court.getLeftLine(), court.getRightLine(), court.getCentreLine(), scoreAnchorPane);
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
         new AnimationTimer() {
             @Override
             public void handle(long currentTime) {
@@ -73,9 +76,6 @@ class Game {
 
         scene.setOnKeyPressed(input::handleKeyPressed);
         scene.setOnKeyReleased(input::handleKeyReleased);
-
-        root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopLine(),
-                court.getBottomLine(), court.getLeftLine(), court.getRightLine(), court.getCentreLine(), scoreAnchorPane);
     }
 
     private static boolean checkForCollision(Shape shape1, Shape shape2) {
