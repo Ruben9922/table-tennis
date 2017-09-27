@@ -13,9 +13,15 @@ class Bat {
     private Dimension2D dimensions;
     private Point2D position;
     private Line shape = new Line();
+    private Input input;
+    private KeyCode moveUpCode;
+    private KeyCode moveDownCode;
 
-    Bat(Dimension2D dimensions, final double positionX) {
+    Bat(Dimension2D dimensions, final double positionX, Input input, KeyCode moveUpCode, KeyCode moveDownCode) {
         this.dimensions = dimensions;
+        this.input = input;
+        this.moveUpCode = moveUpCode;
+        this.moveDownCode = moveDownCode;
 
         position = new Point2D(positionX, (dimensions.getHeight() - Bat.BAT_LENGTH) / 2);
 
@@ -26,7 +32,7 @@ class Bat {
         return shape;
     }
 
-    void update(double delta, Input input, KeyCode moveUpCode, KeyCode moveDownCode) {
+    void update(double delta) {
         if (input.isKeyPressed(moveUpCode)) {
             position = position.subtract(0, SPEED * delta);
         } else if (input.isKeyPressed(moveDownCode)) {

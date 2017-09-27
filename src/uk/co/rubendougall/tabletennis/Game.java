@@ -35,8 +35,8 @@ class Game {
         Dimension2D dimensions = new Dimension2D(800, 500);
 
         final double batSpacingX = 30;
-        leftBat = new Bat(dimensions, batSpacingX);
-        rightBat = new Bat(dimensions, dimensions.getWidth() - batSpacingX);
+        leftBat = new Bat(dimensions, batSpacingX, input, KeyCode.W, KeyCode.S);
+        rightBat = new Bat(dimensions, dimensions.getWidth() - batSpacingX, input, KeyCode.UP, KeyCode.DOWN);
         ball = new Ball(dimensions);
         court = new Court(dimensions);
 
@@ -124,8 +124,8 @@ class Game {
             leftScore.set(leftScore.getValue() + 1);
         }
 
-        leftBat.update(delta, input, KeyCode.W, KeyCode.S);
-        rightBat.update(delta, input, KeyCode.UP, KeyCode.DOWN);
+        leftBat.update(delta);
+        rightBat.update(delta);
         ball.update(delta);
     }
 }
