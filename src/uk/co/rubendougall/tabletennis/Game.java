@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 class Game implements Screen {
+    private Main main;
     private Scene scene;
     private double lastTime = System.nanoTime();
     private Input input = new Input();
@@ -80,13 +81,17 @@ class Game implements Screen {
         scene.setOnKeyReleased(input::handleKeyReleased);
     }
 
-    private static boolean checkForCollision(Shape shape1, Shape shape2) {
-        return Shape.intersect(shape1, shape2).getBoundsInLocal().getWidth() != -1;
-    }
-
     @Override
     public Scene getScene() {
         return scene;
+    }
+
+    void setMain(Main main) {
+        this.main = main;
+    }
+
+    private static boolean checkForCollision(Shape shape1, Shape shape2) {
+        return Shape.intersect(shape1, shape2).getBoundsInLocal().getWidth() != -1;
     }
 
     private double calculateDelta(long currentTime) {

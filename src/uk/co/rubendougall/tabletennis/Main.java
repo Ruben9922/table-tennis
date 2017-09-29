@@ -1,9 +1,13 @@
 package uk.co.rubendougall.tabletennis;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    private Stage stage;
     private Game game;
     private Menu menu;
 
@@ -13,12 +17,26 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Table Tennis");
+        stage = primaryStage;
 
-        menu = new Menu();
-        primaryStage.setScene(menu.getScene());
+        stage.setTitle("Table Tennis");
 
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        Parent root = loader.load();
+        menu = loader.getController();
+        menu.setMain(this);
+        menu.setScene(new Scene(root));
+
+        game = new Game();
+        game.setMain(this);
+
+        stage.setScene(menu.getScene());
+
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    void switchToGame() {
+        stage.setScene(game.getScene());
     }
 }

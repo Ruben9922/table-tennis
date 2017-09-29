@@ -1,21 +1,32 @@
 package uk.co.rubendougall.tabletennis;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 
 import java.io.IOException;
 
 public class Menu implements Screen {
+    private Main main;
     private Scene scene;
 
-    Menu() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
-        scene = new Scene(root);
+    public Menu() throws IOException {
     }
 
     @Override
     public Scene getScene() {
         return scene;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    void setMain(Main main) {
+        this.main = main;
+    }
+
+    @FXML
+    private void playButtonAction() {
+        main.switchToGame();
     }
 }
