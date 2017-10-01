@@ -5,19 +5,18 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class Menu implements Screen {
+public class Menu {
     private Main main;
     private Scene scene;
 
     public Menu() throws IOException {
     }
 
-    @Override
-    public Scene getScene() {
+    Scene getScene() {
         return scene;
     }
 
-    public void setScene(Scene scene) {
+    void setScene(Scene scene) {
         this.scene = scene;
     }
 

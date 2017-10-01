@@ -18,7 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-class Game implements Screen {
+class Game {
     private Main main;
     private Group root;
     private Scene scene;
@@ -74,8 +74,7 @@ class Game implements Screen {
         scene.setOnKeyReleased(input::handleKeyReleased);
     }
 
-    @Override
-    public Scene getScene() {
+    Scene getScene() {
         return scene;
     }
 
