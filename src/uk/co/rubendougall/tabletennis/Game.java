@@ -67,7 +67,6 @@ class Game implements Screen {
             public void handle(long currentTime) {
                 double delta = calculateDelta(currentTime);
                 render(gc, delta);
-
             }
         };
 
