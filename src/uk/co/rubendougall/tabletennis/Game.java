@@ -90,10 +90,6 @@ class Game implements Screen {
         leftBat = new Bat(dimensions, batSpacingX, input, KeyCode.W, KeyCode.S);
         rightBat = new Bat(dimensions, dimensions.getWidth() - batSpacingX, input, KeyCode.UP, KeyCode.DOWN);
         ball = new Ball(dimensions);
-        System.out.println(ball);
-        System.out.println(dimensions);
-        System.out.println(ball.getShape().getCenterX());
-        System.out.println(ball.getShape().getCenterY());
         court = new Court(dimensions);
 
         root.getChildren().setAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopLine(),
