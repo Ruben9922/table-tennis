@@ -20,8 +20,7 @@ class Ball {
     Ball(Dimension2D dimensions) {
         this.dimensions = dimensions;
 
-        boolean negateSpeed = random.nextInt() >= 0.5;
-        reset(negateSpeed);
+        reset(random.nextInt() >= 0.5);
     }
 
     Circle getShape() {
