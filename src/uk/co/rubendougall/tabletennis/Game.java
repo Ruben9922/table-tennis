@@ -20,26 +20,24 @@ import javafx.scene.text.TextAlignment;
 
 class Game implements Screen {
     private Main main;
+    private Group root;
     private Scene scene;
-    private double lastTime = System.nanoTime();
+    private Dimension2D dimensions = new Dimension2D(800, 500);
+    private Canvas canvas = new Canvas(dimensions.getWidth(), dimensions.getHeight());
+    private AnimationTimer animationTimer;
+    private double lastTime;
+    private AnchorPane scoreAnchorPane;
     private Input input = new Input();
     private Bat leftBat;
     private Bat rightBat;
     private Ball ball;
     private Court court;
-    private IntegerProperty leftScore = new SimpleIntegerProperty(0);
-    private IntegerProperty rightScore = new SimpleIntegerProperty(0);
+    private IntegerProperty leftScore = new SimpleIntegerProperty();
+    private IntegerProperty rightScore = new SimpleIntegerProperty();
 
     Game() {
-        Group root = new Group();
+        root = new Group();
         scene = new Scene(root);
-        Dimension2D dimensions = new Dimension2D(800, 500);
-
-        final double batSpacingX = 30;
-        leftBat = new Bat(dimensions, batSpacingX, input, KeyCode.W, KeyCode.S);
-        rightBat = new Bat(dimensions, dimensions.getWidth() - batSpacingX, input, KeyCode.UP, KeyCode.DOWN);
-        ball = new Ball(dimensions);
-        court = new Court(dimensions);
 
         final Point2D textSpacing = new Point2D(10, 2);
         Text leftScoreLabel = new Text();
@@ -55,7 +53,7 @@ class Game implements Screen {
         rightScoreLabel.setTextOrigin(VPos.TOP);
         rightScoreLabel.textProperty().bind(rightScore.asString());
 
-        AnchorPane scoreAnchorPane = new AnchorPane(leftScoreLabel, rightScoreLabel);
+        scoreAnchorPane = new AnchorPane(leftScoreLabel, rightScoreLabel);
         AnchorPane.setLeftAnchor(leftScoreLabel, textSpacing.getX());
         AnchorPane.setTopAnchor(leftScoreLabel, textSpacing.getY());
         AnchorPane.setRightAnchor(rightScoreLabel, textSpacing.getX());
@@ -63,19 +61,15 @@ class Game implements Screen {
         scoreAnchorPane.prefWidthProperty().bind(scene.widthProperty());
         scoreAnchorPane.prefHeightProperty().bind(scene.heightProperty());
 
-        Canvas canvas = new Canvas(dimensions.getWidth(), dimensions.getHeight());
-        root.getChildren().addAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopLine(),
-                court.getBottomLine(), court.getLeftLine(), court.getRightLine(), court.getCentreLine(), scoreAnchorPane);
-
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        new AnimationTimer() {
+        animationTimer = new AnimationTimer() {
             @Override
             public void handle(long currentTime) {
                 double delta = calculateDelta(currentTime);
                 render(gc, delta);
 
             }
-        }.start();
+        };
 
         scene.setOnKeyPressed(input::handleKeyPressed);
         scene.setOnKeyReleased(input::handleKeyReleased);
@@ -88,6 +82,34 @@ class Game implements Screen {
 
     void setMain(Main main) {
         this.main = main;
+    }
+
+    void reset() {
+        lastTime = System.nanoTime();
+
+        final double batSpacingX = 30;
+        leftBat = new Bat(dimensions, batSpacingX, input, KeyCode.W, KeyCode.S);
+        rightBat = new Bat(dimensions, dimensions.getWidth() - batSpacingX, input, KeyCode.UP, KeyCode.DOWN);
+        ball = new Ball(dimensions);
+        System.out.println(ball);
+        System.out.println(dimensions);
+        System.out.println(ball.getShape().getCenterX());
+        System.out.println(ball.getShape().getCenterY());
+        court = new Court(dimensions);
+
+        root.getChildren().setAll(canvas, leftBat.getShape(), rightBat.getShape(), ball.getShape(), court.getTopLine(),
+                court.getBottomLine(), court.getLeftLine(), court.getRightLine(), court.getCentreLine(), scoreAnchorPane);
+
+        leftScore.set(0);
+        rightScore.set(0);
+    }
+
+    void start() {
+        animationTimer.start();
+    }
+
+    void stop() {
+        animationTimer.stop();
     }
 
     private static boolean checkForCollision(Shape shape1, Shape shape2) {

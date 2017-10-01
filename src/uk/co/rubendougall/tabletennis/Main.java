@@ -37,6 +37,8 @@ public class Main extends Application {
     }
 
     void switchToGame() {
+        game.reset();
+        game.start();
         stage.setScene(game.getScene());
     }
 }
