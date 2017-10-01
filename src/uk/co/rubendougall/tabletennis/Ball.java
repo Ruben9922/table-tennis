@@ -10,6 +10,7 @@ import java.util.Random;
 // TODO: Fix ball not starting from centre when application started
 // TODO: Fix ball disappearing
 // TODO: Fix ball rapidly changing x-direction when hitting bat
+// TODO: Change so resultant velocity always stays same (currently vertical speed changed while horizontal speed stays same)
 class Ball {
     private Dimension2D dimensions;
     private Point2D position;
