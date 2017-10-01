@@ -7,9 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private Stage stage;
-    private Game game;
     private Menu menu;
+    private Game game;
+    private Stage menuStage; // TODO: Put stages inside relevant classes
+    private Stage gameStage;
 
     public static void main(String[] args) {
         launch(args);
@@ -17,28 +18,39 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        stage = primaryStage;
-
-        stage.setTitle("Table Tennis");
-
+        // Set up menu
         FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
         Parent root = loader.load();
         menu = loader.getController();
         menu.setMain(this);
         menu.setScene(new Scene(root));
 
+        // Set up game
         game = new Game();
         game.setMain(this);
 
-        stage.setScene(menu.getScene());
+        // Set up stages
+        menuStage = primaryStage;
+        menuStage.setScene(menu.getScene());
+        menuStage.setTitle("Table Tennis");
+        menuStage.setResizable(false);
+        gameStage = new Stage();
+        gameStage.setScene(game.getScene());
+        gameStage.setTitle("Table Tennis");
+        gameStage.setResizable(true);
 
-        stage.setResizable(false);
-        stage.show();
+        menuStage.show();
+    }
+
+    void switchToMenu() {
+        gameStage.hide();
+        menuStage.show();
     }
 
     void switchToGame() {
+        menuStage.hide();
         game.reset();
+        gameStage.show();
         game.start();
-        stage.setScene(game.getScene());
     }
 }
